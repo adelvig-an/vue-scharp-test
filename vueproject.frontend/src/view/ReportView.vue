@@ -11,7 +11,7 @@
                     {{ report.number }}
                 </td>
                 <td>
-                    {{ report.date}}
+                    {{ report.createOn}}
                 </td>
             </tr>
         </table>
@@ -27,14 +27,25 @@
         data() {
             return {
                 title: 'Report page',
-                reports: []
+                reports: null
             };
         },
-        
+        created() {
+            this.featchReport();
+        },
         methods: {
             async getData() {
                 const response = await axios.get('https://localhost:5002/api/report');
                 this.reports = response;
+            },
+
+            featchReport() {
+                fetch('https://localhost:5002/api/report')
+                    .then(r => r.json())
+                    .then(json => {
+                        this.reports = json;
+                        return;
+                    });
             }
         }
     }
