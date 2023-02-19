@@ -11,7 +11,7 @@
                     {{ report.number }}
                 </td>
                 <td>
-                    {{ report.createOn}}
+                    {{ report.createOn }}
                 </td>
             </tr>
         </table>
@@ -31,12 +31,13 @@
             };
         },
         created() {
-            this.featchReport();
+            this.getData();
         },
         methods: {
             async getData() {
                 const response = await axios.get('https://localhost:5002/api/report');
                 this.reports = response;
+                console.log("Data received");
             },
 
             featchReport() {
