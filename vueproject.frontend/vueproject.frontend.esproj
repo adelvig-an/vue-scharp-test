@@ -12,6 +12,9 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="view\" />
+    <TypeScriptConfiguration Remove="view\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="view\**" />
   </ItemGroup>
 </Project>

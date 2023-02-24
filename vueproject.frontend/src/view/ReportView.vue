@@ -11,7 +11,7 @@
                     {{ report.number }}
                 </td>
                 <td>
-                    {{ report.createOn }}
+                    {{ formatDate(report.createOn) }}
                 </td>
             </tr>
         </table>
@@ -35,18 +35,18 @@
         },
         methods: {
             async getData() {
-                const response = await axios.get('https://localhost:5002/api/report');
-                this.reports = response;
-                console.log("Data received");
+                try {
+                    const response = await axios.get('https://localhost:5002/api/report');
+                    this.reports = response.data;
+                    console.log(response);
+                } catch (e) {
+                    alert('Error')
+                }
             },
-
-            featchReport() {
-                fetch('https://localhost:5002/api/report')
-                    .then(r => r.json())
-                    .then(json => {
-                        this.reports = json;
-                        return;
-                    });
+            formatDate(dateString) {
+                const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                const date = new Date(dateString);
+                return date.toLocaleDateString('ru-RU', options);
             }
         }
     }
